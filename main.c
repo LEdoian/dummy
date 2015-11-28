@@ -6,34 +6,23 @@
 
 #define DEBUG
 
-bool finish;
-
 void gotsig(int sig);
 
 int main(void) {
-#ifdef DEBUG
-	long long unsigned int i = 0;
-#endif
 	fprintf(stdout, "Waiting for SIGINT (^C), sleeping until then.\n");
 	signal(SIGINT, &gotsig);
-//	finish = false;
-	while (true) {
-#ifdef DEBUG
-		fprintf(stderr, "DEBUG: Iteration: %llu\n", i++);
-#endif
+	start:
 		pause();
-	}
+		goto start;
 	return EXIT_SUCCESS;
 }
 
 void gotsig(int sig) {
 	fprintf(stdout, "Signal received\n");
-	
 	char c;
 	fprintf(stdout, "Enter one of [QqEe] to exit or anything else to go sleeping again: ");
 	c=getchar();
 	if (c=='Q' || c=='q' || c=='E' || c=='e') {
-		finish = true;
 		fprintf(stdout, "Have a nice day!\n");
 		exit(EXIT_SUCCESS);
 	} else {
