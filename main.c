@@ -16,8 +16,8 @@ int main(void) {
 #endif
 	fprintf(stdout, "Waiting for SIGINT (^C), sleeping until then.\n");
 	signal(SIGINT, &gotsig);
-	finish = false;
-	while (!finish) {
+//	finish = false;
+	while (true) {
 #ifdef DEBUG
 		fprintf(stderr, "DEBUG: Iteration: %llu\n", i++);
 #endif
@@ -35,6 +35,7 @@ void gotsig(int sig) {
 	if (c=='Q' || c=='q' || c=='E' || c=='e') {
 		finish = true;
 		fprintf(stdout, "Have a nice day!\n");
+		exit(EXIT_SUCCESS);
 	} else {
 		fprintf(stdout, "Going to sleep again, with anger to you that you woke me up!\n");
 	}
