@@ -7,8 +7,6 @@
 #include <string.h>
 #include <err.h>
 
-#define DEBUG
-
 void args_process(int argc, char **argv);
 void arg_process(char *arg);
 void gotsig(int sig);
@@ -29,7 +27,6 @@ int main(int argc, char **argv) {
 	signal(SIGINT, &gotsig);
 	start:
 		pause();
-		perror(NULL);	// Should I really check for the return value??
 		goto start;
 	return EXIT_SUCCESS;
 }
@@ -38,7 +35,9 @@ void gotsig(int sig) {
 	fprintf(stdout, "Signal received\n");
 	char c;
 	fprintf(stdout, "Enter one of [QqEe] to exit or anything else to go sleeping again: ");
-	if (args.allow_x == true) fprintf(stdout, "\nYou may also use one of [Xx] to execute a program: ");
+	if (args.allow_x == true) {
+		fprintf(stdout, "\nYou may also use one of [Xx] to execute a program: ");
+	}
 	c=getchar();
 	if (c=='Q' || c=='q' || c=='E' || c=='e') {
 		fprintf(stdout, "Have a nice day!\n");
@@ -68,7 +67,7 @@ void args_process(int argc, char **argv) {
 void arg_process(char *arg) {
 	if (strcmp(arg, "--allow-x") == 0) args.allow_x = true ;
 	else if (strcmp(arg, "--help") == 0) err(0, "Not yet implemented, sorry!!") ;
-	else err(1, "Unexpected argument, see --help");
+	else errx(1, "Unexpected argument, see --help");
 }
 
 void init_args (void) {
@@ -80,8 +79,12 @@ void prompt_run(void) {
 	// TODO: make a prompt here, not use dmenu!! (X dependecy is bad!!)
 	if ( fork() == 0 ) {
 		execl("/bin/dmenu_run", "dmenu_run", NULL);
-		perror(NULL);		// Should not get here, just in case
+		perror("Exec");		// Should not get here, just in case
 	}
-	else perror(NULL);
+	else {
+#ifdef DEBUG
+			perror("Fork");
+#endif
+	}
 	return;
 }
