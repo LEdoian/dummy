@@ -13,12 +13,18 @@ void gotsig(int sig);
 void init_args(void);
 void prompt_run(void);
 
-typedef struct s_args {
-	int ui;			// One of NCURSES, TERM, GTK, maybe more
-	bool allow_x;	// Whether we want to allow [Xx] as an option to execute programs
-} t_args;
+enum ui {
+	NCURSES,
+	TERM,
+	GTK,
+};
 
-t_args args;
+struct args {
+	enum ui ui;			// One of NCURSES, TERM, GTK, maybe more
+	bool allow_x;	// Whether we want to allow [Xx] as an option to execute programs
+};
+
+struct args args;
 
 int main(int argc, char **argv) {
 	init_args();
