@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+GTK	main.c	/^	GTK,$/;"	e	enum:ui	file:
+NCURSES	main.c	/^	NCURSES,$/;"	e	enum:ui	file:
+TERM	main.c	/^	TERM,$/;"	e	enum:ui	file:
+allow_x	main.c	/^	bool allow_x;	\/\/ Whether we want to allow [Xx] as an option to execute programs$/;"	m	struct:args	file:
+arg_process	main.c	/^void arg_process(char *arg) {$/;"	f
+args	main.c	/^struct args args;$/;"	v	typeref:struct:args
+args	main.c	/^struct args {$/;"	s	file:
+args_process	main.c	/^void args_process(int argc, char **argv) {$/;"	f
+gotsig	main.c	/^void gotsig(int sig) {$/;"	f
+init_args	main.c	/^void init_args (void) {$/;"	f
+main	main.c	/^int main(int argc, char **argv) {$/;"	f
+prompt_run	main.c	/^void prompt_run(void) {$/;"	f
+ui	main.c	/^	enum ui ui;			\/\/ One of NCURSES, TERM, GTK, maybe more$/;"	m	struct:args	typeref:enum:args::ui	file:
+ui	main.c	/^enum ui {$/;"	g	file:
